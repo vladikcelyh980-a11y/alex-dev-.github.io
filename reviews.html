@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Отзывы — PetroEarth</title>
+    <style>
+        :root {
+            --green: #2ecc71;
+            --dark-green: #27ae60;
+            --light-green: #e9f7ef;
+            --black: #2c3e50;
+            --white: #ffffff;
+            --transition: all 0.3s ease;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--light-green); color: var(--black); }
+
+        /* HEADER */
+        header { background: var(--white); padding: 20px; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        nav { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; }
+        .logo { font-size: 24px; font-weight: bold; color: var(--dark-green); text-decoration: none; }
+        .nav-links a { margin-left: 20px; text-decoration: none; color: var(--black); font-weight: 600; transition: var(--transition); }
+        .nav-links a:hover { color: var(--green); }
+
+        /* REVIEWS SECTION */
+        .container { max-width: 800px; margin: 0 auto; padding: 60px 20px; }
+        h1 { color: var(--dark-green); text-align: center; margin-bottom: 40px; font-size: 36px; }
+
+        /* ФОРМА (Zero Block Style) */
+        .review-form {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            margin-bottom: 50px;
+            border: 2px solid var(--green);
+        }
+        .review-form h3 { margin-bottom: 20px; color: var(--dark-green); }
+        input, textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-family: inherit;
+            outline: none;
+            transition: var(--transition);
+        }
+        input:focus, textarea:focus { border-color: var(--green); box-shadow: 0 0 10px rgba(46, 204, 113, 0.2); }
+        textarea { height: 120px; resize: none; }
+
+        .btn-submit {
+            background: var(--green);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+        .btn-submit:hover {
+            background: var(--dark-green);
+            transform: scale(1.02);
+        }
+
+        /* СПИСОК ОТЗЫВОВ */
+        #reviews-list { display: flex; flex-direction: column; gap: 20px; }
+        .review-card {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+            border-left: 6px solid var(--green);
+            animation: slideIn 0.5s ease-out; /* Анимация 1 */
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .review-card strong { color: var(--dark-green); font-size: 18px; display: block; margin-bottom: 5px; }
+        .review-card p { color: #555; font-style: italic; }
+
+        @media (max-width: 768px) { .nav-links { display: none; } }
+    </style>
+</head>
+<body>
+
+<header>
+    <nav>
+        <a href="index.html" class="logo">PETRO EARTH</a>
+        <div class="nav-links">
+            <a href="index.html">Главная</a>
+            <a href="about.html">О нас</a>
+            <a href="catalog.html">Участки</a>
+            <a href="reviews.html" style="color: var(--green);">Отзывы</a>
+            <a href="contacts.html">Контакты</a>
+        </div>
+    </nav>
+</header>
+
+<main class="container">
+    <h1>Что о нас говорят</h1>
+
+    <div class="review-form">
+        <h3>Оставить свой отзыв</h3>
+        <form id="revForm">
+            <input type="text" id="userName" placeholder="Ваше имя" required>
+            <textarea id="userMsg" placeholder="Поделитесь впечатлениями..." required></textarea>
+            <button type="submit" class="btn-submit">Опубликовать отзыв</button>
+        </form>
+    </div>
+
+    <div id="reviews-list">
+        <div class="review-card">
+            <strong>Марина Соколова</strong>
+            <p>"Купили участок в Заречном. Очень довольны сервисом! Сайт такой же яркий и позитивный, как и сотрудники в офисе на Алматинской."</p>
+        </div>
+        <div class="review-card">
+            <strong>Дмитрий</strong>
+            <p>"Лучшие цены в Петропавловске. Всё прозрачно и честно. Рекомендую PetroEarth!"</p>
+        </div>
+    </div>
+</main>
+
+<script>
+    // Скрипт добавления отзыва (Интерактив)
+    document.getElementById('revForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const name = document.getElementById('userName').value;
+        const msg = document.getElementById('userMsg').value;
+        const list = document.getElementById('reviews-list');
+
+        // Создаем новую карточку
+        const newReview = document.createElement('div');
+        newReview.className = 'review-card';
+        newReview.innerHTML = `<strong>${name}</strong><p>"${msg}"</p>`;
+
+        // Добавляем в начало списка
+        list.prepend(newReview);
+
+        // Очищаем форму
+        this.reset();
+    });
+</script>
+
+</body>
+</html>
