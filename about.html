@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>О нас — PetroEarth Петропавловск</title>
+    <style>
+        :root {
+            --green: #2ecc71;
+            --dark-green: #27ae60;
+            --light-green: #e9f7ef;
+            --black: #2c3e50;
+            --transition: all 0.3s ease;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--light-green); color: var(--black); line-height: 1.6; }
+
+        /* HEADER (Тот же, что на главной) */
+        header { background: #fff; padding: 20px; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        nav { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; }
+        .logo { font-size: 24px; font-weight: bold; color: var(--dark-green); text-decoration: none; }
+        .nav-links a { margin-left: 20px; text-decoration: none; color: var(--black); font-weight: 600; transition: var(--transition); }
+        .nav-links a:hover { color: var(--green); }
+
+        /* CONTENT SECTION */
+        .content-area { max-width: 1200px; margin: 0 auto; padding: 80px 20px; }
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+        
+        .about-text h1 { font-size: 48px; color: var(--dark-green); margin-bottom: 20px; }
+        .about-text p { font-size: 18px; margin-bottom: 20px; }
+        
+        /* Zero Block элемент (Анимация 1) */
+        .highlight-box {
+            background: var(--green);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            position: relative;
+            transform: rotate(-2deg);
+            transition: var(--transition);
+            box-shadow: 10px 10px 0px var(--dark-green);
+        }
+        .highlight-box:hover {
+            transform: rotate(0deg) scale(1.02); /* Анимация при наведении */
+        }
+
+        /* Картинка с анимацией (Анимация 2) */
+        .about-img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transition: var(--transition);
+        }
+        .about-img:hover {
+            filter: saturate(1.5);
+            transform: translateY(-10px);
+        }
+
+        /* Футер для контактов (быстрый доступ) */
+        footer { text-align: center; padding: 40px; background: white; margin-top: 50px; }
+
+        @media (max-width: 768px) {
+            .about-grid { grid-template-columns: 1fr; text-align: center; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <nav>
+        <a href="index.html" class="logo">PETRO EARTH</a>
+        <div class="nav-links">
+            <a href="index.html">Главная</a>
+            <a href="about.html" style="color: var(--green);">О нас</a>
+            <a href="catalog.html">Участки</a>
+            <a href="reviews.html">Отзывы</a>
+            <a href="contacts.html">Контакты</a>
+        </div>
+    </nav>
+</header>
+
+<main class="content-area">
+    <div class="about-grid">
+        <div class="about-text">
+            <h1>Мы создаем простор для жизни</h1>
+            <p><strong>PetroEarth</strong> — это ведущее агентство по продаже земельных участков в Петропавловске. Мы верим, что каждый житель нашего города заслуживает свой зеленый уголок.</p>
+            
+            <div class="highlight-box">
+                <h3>Почему мы?</h3>
+                <p>Наш офис находится по адресу <strong>ул. Алматинская 11</strong>. Мы знаем каждый район города и предлагаем только те участки, где сами бы хотели жить!</p>
+            </div>
+            
+            <p style="margin-top: 30px;">С 2010 года мы успешно провели более 500 сделок. Мы берем на себя всю бумажную волокиту, чтобы вы могли просто наслаждаться своим будущим садом.</p>
+        </div>
+        
+        <div>
+            <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600" alt="Природа Петропавловска" class="about-img">
+        </div>
+    </div>
+</main>
+
+<footer>
+    <p>© 2026 PetroEarth Петропавловск. Алматинская 11.</p>
+    <p>Связь с нами: <strong>7 775 858 8741</strong></p>
+</footer>
+
+</body>
+</html>
