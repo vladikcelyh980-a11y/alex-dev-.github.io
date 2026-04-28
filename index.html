@@ -3,51 +3,352 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zero Block Website</title>
+    <title>Премиальные Земельные Участки — TerraLux</title>
     <style>
-        :root { --main-color: #3498db; --grid-gap: 20px; }
-        body { margin: 0; font-family: sans-serif; overflow-x: hidden; }
-        
-        /* Сетка Zero Block */
-        .zero-block {
+        /* === ОБЩИЕ СТИЛИ (База для Zero Block) === */
+        :root {
+            --bg-color: #121212;
+            --text-color: #ffffff;
+            --accent-color: #cbb26a; /* Золотой/песочный акцент */
+            --grid-container: 1200px;
+            --transition: all 0.3s ease;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Утилиты для сетки и отступов */
+        .container {
+            max-width: var(--grid-container);
+            margin: 0 auto;
+            position: relative;
+            height: 100%;
+            padding: 0 20px;
+        }
+
+        section {
             position: relative;
             width: 100%;
-            height: 100vh; /* Высота экрана */
-            max-width: 1200px;
+            min-height: 100vh; /* Каждый раздел занимает экран */
+            padding: 100px 0;
+            overflow: hidden;
+        }
+
+        h2.section-title {
+            font-size: 48px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 60px;
+            text-align: center;
+            color: var(--accent-color);
+        }
+
+        /* === КНОПКИ И АНИМАЦИЯ НАВЕДЕНИЯ (Требование 4) === */
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background-color: transparent;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+            text-transform: uppercase;
+            text-decoration: none;
+            letter-spacing: 1px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition); /* Анимация 1: плавный переход */
+        }
+
+        .cta-button:hover {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            box-shadow: 0 0 20px rgba(203, 178, 106, 0.5); /* Анимация 1: свечение */
+            transform: translateY(-3px);
+        }
+
+        /* === 1. ГЛАВНЫЙ ЭКРАН (Hero) === */
+        #hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.8)), 
+                        url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1920') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        /* Навигация (внутри Hero) */
+        .nav-zero {
+            position: absolute;
+            top: 40px;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: var(--grid-container);
             margin: 0 auto;
+            padding: 0 20px;
         }
 
-        /* Анимация появления */
-        .fade-in {
-            animation: fadeIn 1.5s ease-out forwards;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .logo { font-size: 24px; font-weight: bold; color: var(--accent-color); text-decoration: none; }
+        .nav-links { display: flex; list-style: none; gap: 30px; }
+        .nav-links a { text-decoration: none; color: #ccc; text-transform: uppercase; font-size: 13px; transition: var(--transition); }
+        .nav-links a:hover { color: var(--text-color); }
+
+        /* Контент Hero */
+        .hero-content h1 { font-size: 64px; line-height: 1.1; margin-bottom: 20px; text-transform: uppercase; }
+        .hero-content p { font-size: 18px; color: #ccc; max-width: 600px; margin: 0 auto 40px; }
+
+        /* === 2. О НАС === */
+        #about { background-color: #1a1a1a; }
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+        .about-text h3 { color: var(--accent-color); font-size: 28px; margin-bottom: 20px; }
+        .about-image {
+            width: 100%;
+            height: 400px;
+            background: url('https://images.unsplash.com/photo-1582407947304-fd86f028f716?q=80&w=800') no-repeat center center/cover;
+            border: 1px solid #333;
         }
 
-        /* Адаптация под мобильные */
+        /* === 3. УСЛУГИ И ТОВАРЫ (Земельные участки) === */
+        .lands-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--grid-gap, 30px);
+            margin-top: 50px;
+        }
+
+        /* Карточка участка и АНИМАЦИЯ НАВЕДЕНИЯ (Требование 4) */
+        .land-card {
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            overflow: hidden;
+            transition: var(--transition); /* Подготовка к анимации */
+            position: relative;
+        }
+
+        .land-card:hover {
+            transform: translateY(-10px); /* Анимация 2: всплытие */
+            border-color: var(--accent-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .land-img {
+            width: 100%;
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            transition: var(--transition);
+        }
+        
+        /* Анимация картинки при наведении на карточку */
+        .land-card:hover .land-img {
+            transform: scale(1.05); /* Анимация 2: увеличение фото */
+        }
+
+        .land-info { padding: 25px; }
+        .land-info h4 { font-size: 20px; margin-bottom: 10px; text-transform: uppercase; }
+        .land-info p { color: #aaa; font-size: 14px; margin-bottom: 15px; }
+        .land-price { font-size: 18px; color: var(--accent-color); font-weight: bold; }
+
+        /* === 4. ОТЗЫВЫ === */
+        #reviews { background-color: #1a1a1a; }
+        .reviews-list { display: flex; flex-direction: column; gap: 30px; max-width: 800px; margin: 0 auto; }
+        .review-item { background: #121212; padding: 30px; border-left: 3px solid #333; }
+        .review-item:hover { border-left-color: var(--accent-color); }
+        .review-name { font-weight: bold; color: var(--accent-color); margin-bottom: 10px; }
+        .review-text { font-style: italic; color: #ccc; }
+
+        /* Форма отзыва */
+        .review-form { max-width: 800px; margin: 60px auto 0; background: #121212; padding: 40px; border: 1px solid #333; }
+        .review-form h3 { margin-bottom: 20px; text-align: center; }
+
+        /* === 5. КОНТАКТЫ ДЛЯ СВЯЗИ === */
+        .contacts-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            margin-top: 50px;
+        }
+
+        .contact-info-box { background: #1a1a1a; padding: 40px; border: 1px solid #333; }
+        .contact-item { margin-bottom: 30px; }
+        .contact-item h4 { color: #888; text-transform: uppercase; font-size: 12px; letter-spacing: 1px; margin-bottom: 5px; }
+        .contact-item p, .contact-item a { font-size: 20px; color: var(--text-color); text-decoration: none; transition: var(--transition); }
+        .contact-item a:hover { color: var(--accent-color); }
+
+        /* Форма обратной связи (Требование 4) */
+        .callback-form { display: flex; flex-direction: column; gap: 20px; }
+        input, textarea, select {
+            width: 100%;
+            padding: 15px;
+            background-color: #121212;
+            border: 1px solid #333;
+            color: var(--text-color);
+            font-family: inherit;
+        }
+        input:focus, textarea:focus { border-color: var(--accent-color); outline: none; }
+        textarea { height: 120px; resize: none; }
+
+        /* === АДАПТАЦИЯ ПОД MOBILE (Требование 2) === */
+        @media (max-width: 1024px) {
+            h2.section-title { font-size: 36px; }
+            .hero-content h1 { font-size: 40px; }
+            .about-grid, .contacts-wrapper { grid-template-columns: 1fr; }
+        }
+
         @media (max-width: 768px) {
-            .zero-block { height: auto; padding: 50px 20px; }
-            .absolute-element { position: static !important; }
+            section { padding: 60px 0; }
+            .nav-links { display: none; } /* Скрываем меню на мобильных для простоты */
+            .hero-content h1 { font-size: 32px; }
+            .hero-content p { font-size: 16px; }
+            .lands-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <section class="zero-block fade-in">
-        <h1 style="position: absolute; top: 30%; left: 5%;">Ваш Будущий Проект</h1>
-        <button class="cta-button" style="position: absolute; top: 50%; left: 5%;">Заказать сейчас</button>
+    <nav class="nav-zero">
+        <div class="nav-container">
+            <a href="#" class="logo">TERRALUX</a>
+            <ul class="nav-links">
+                <li><a href="#about">О нас</a></li>
+                <li><a href="#catalog">Участки</a></li>
+                <li><a href="#reviews">Отзывы</a></li>
+                <li><a href="#contacts">Контакты</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="hero">
+        <div class="container hero-content">
+            <h1>Инвестируйте в землю.<br>Стройте будущее.</h1>
+            <p>Эксклюзивные земельные участки в живописных и стратегически важных районах. Ваш фундамент для успеха.</p>
+            <a href="#catalog" class="cta-button">Смотреть каталог</a>
+        </div>
     </section>
 
-    <section class="zero-block">
-        <h2>Связаться с нами</h2>
-        <form id="feedback-form">
-            <input type="text" placeholder="Имя" required>
-            <input type="email" placeholder="Email" required>
-            <textarea placeholder="Ваш запрос"></textarea>
-            <button type="submit">Отправить</button>
-        </form>
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">О компании</h2>
+            <div class="about-grid">
+                <div class="about-text">
+                    <h3>15 лет безупречной репутации</h3>
+                    <p>TerraLux — лидер рынка в сегменте реализации земельных активов. Мы не просто продаем участки, мы помогаем находить идеальные места для жизни и ведения бизнеса.</p>
+                    <p style="margin-top: 15px;">Полное юридическое сопровождение, прозрачные сделки и проверка каждого квадратного метра.</p>
+                </div>
+                <div class="about-image"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="catalog">
+        <div class="container">
+            <h2 class="section-title">Наши Участки</h2>
+            
+            <div class="lands-grid">
+                <div class="land-card">
+                    <div class="land-img" style="background-image: url('https://images.unsplash.com/photo-1591389703635-e15a07b842d7?q=80&w=600');"></div>
+                    <div class="land-info">
+                        <h4>Green Valley Residence</h4>
+                        <p>12 соток, ИЖС, Все коммуникации. Вид на лес.</p>
+                        <div class="land-price">15 000 000 ₸</div>
+                        <a href="#contacts" class="cta-button" style="margin-top: 15px; width: 100%; text-align: center;">Узнать больше</a>
+                    </div>
+                </div>
+
+                <div class="land-card">
+                    <div class="land-img" style="background-image: url('https://images.unsplash.com/photo-1599301138830-41bf37351543?q=80&w=600');"></div>
+                    <div class="land-info">
+                        <h4>Business Hub Plot</h4>
+                        <p>25 соток, Коммерция, Первая линия от трассы.</p>
+                        <div class="land-price">42 500 000 ₸</div>
+                        <a href="#contacts" class="cta-button" style="margin-top: 15px; width: 100%; text-align: center;">Узнать больше</a>
+                    </div>
+                </div>
+
+                <div class="land-card">
+                    <div class="land-img" style="background-image: url('https://images.unsplash.com/photo-1610992015762-434031649989?q=80&w=600');"></div>
+                    <div class="land-info">
+                        <h4>Eco-Farm Area</h4>
+                        <p>1 Гектар, Крестьянское хозяйство, Рядом река.</p>
+                        <div class="land-price">28 000 000 ₸</div>
+                        <a href="#contacts" class="cta-button" style="margin-top: 15px; width: 100%; text-align: center;">Узнать больше</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews">
+        <div class="container">
+            <h2 class="section-title">Отзывы клиентов</h2>
+            <div class="reviews-list">
+                <div class="review-item">
+                    <div class="review-name">Арман Н.</div>
+                    <div class="review-text">"Спасибо TerraLux за отличный участок под дачу. Сделка прошла быстро, документы оформили за один день. Очень доволен!"</div>
+                </div>
+                <div class="review-item">
+                    <div class="review-name">ТОО "StroyInvest"</div>
+                    <div class="review-text">"Профессиональный подход к коммерческой недвижимости. Нашли участок с идеальным расположением для нашего ТЦ."</div>
+                </div>
+            </div>
+
+            <form class="review-form">
+                <h3>Оставить отзыв</h3>
+                <input type="text" placeholder="Ваше Имя / Компания" required>
+                <textarea placeholder="Ваш отзыв..." required></textarea>
+                <button type="submit" class="cta-button">Опубликовать</button>
+            </form>
+        </div>
+    </section>
+
+    <section id="contacts">
+        <div class="container">
+            <h2 class="section-title">Контакты</h2>
+            <div class="contacts-wrapper">
+                
+                <div class="contact-info-box">
+                    <div class="contact-item">
+                        <h4>Телефон</h4>
+                        <a href="tel:+77758588741">7 775 858 8741</a>
+                    </div>
+                    <div class="contact-item">
+                        <h4>Instagram</h4>
+                        <a href="https://instagram.com/tselyhvlad" target="_blank">@tselyhvlad</a>
+                    </div>
+                    <div class="contact-item">
+                        <h4>Офис</h4>
+                        <p>г. Алматы, пр. Аль-Фараби, 77/7</p>
+                    </div>
+                </div>
+
+                <div class="contact-info-box">
+                    <form class="callback-form">
+                        <h4>Заказать консультацию</h4>
+                        <input type="text" placeholder="Имя" required>
+                        <input type="tel" placeholder="Телефон" required>
+                        <select>
+                            <option value="" disabled selected>Интересует участок...</option>
+                            <option value="izhs">Под ИЖС</option>
+                            <option value="comm">Коммерция</option>
+                        </select>
+                        <button type="submit" class="cta-button">Отправить заявку</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
     </section>
 
 </body>
