@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог участков — PetroEarth</title>
+    <style>
+        :root {
+            --green: #2ecc71;
+            --dark-green: #27ae60;
+            --light-green: #e9f7ef;
+            --black: #2c3e50;
+            --white: #ffffff;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--light-green); color: var(--black); line-height: 1.6; }
+
+        /* HEADER */
+        header { background: var(--white); padding: 20px; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 15px rgba(0,0,0,0.05); }
+        nav { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; }
+        .logo { font-size: 26px; font-weight: 800; color: var(--dark-green); text-decoration: none; letter-spacing: -1px; }
+        .logo span { color: var(--green); }
+        .nav-links a { margin-left: 25px; text-decoration: none; color: var(--black); font-weight: 600; transition: var(--transition); text-transform: uppercase; font-size: 14px; }
+        .nav-links a:hover { color: var(--green); }
+
+        /* CATALOG SECTION */
+        .catalog-container { max-width: 1200px; margin: 0 auto; padding: 60px 20px; }
+        .catalog-header { text-align: center; margin-bottom: 50px; }
+        .catalog-header h1 { font-size: 42px; color: var(--dark-green); margin-bottom: 10px; }
+        
+        /* GRID */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+
+        /* КАРТОЧКА (Zero Block Style + Анимации) */
+        .card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transition: var(--transition);
+            border: 1px solid rgba(46, 204, 113, 0.1);
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 30px rgba(46, 204, 113, 0.2);
+            border-color: var(--green);
+        }
+
+        .card-img-wrapper {
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .card:hover img {
+            transform: scale(1.1); /* Анимация 2: увеличение фото */
+        }
+
+        .card-content { padding: 25px; }
+        .card-content h3 { color: var(--dark-green); font-size: 22px; margin-bottom: 10px; }
+        .card-content p { color: #666; font-size: 15px; margin-bottom: 20px; }
+        
+        .price-tag {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--black);
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        /* КНОПКА CTA */
+        .btn-buy {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: var(--green);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 700;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-buy:hover {
+            background: var(--dark-green);
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.4);
+        }
+
+        /* БЕЙДЖ "NEW" */
+        .badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #ff7675;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 10;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .catalog-header h1 { font-size: 32px; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <nav>
+        <a href="index.html" class="logo">PETRO<span>EARTH</span></a>
+        <div class="nav-links">
+            <a href="index.html">Главная</a>
+            <a href="about.html">О нас</a>
+            <a href="catalog.html" style="color: var(--green);">Участки</a>
+            <a href="reviews.html">Отзывы</a>
+            <a href="contacts.html">Контакты</a>
+        </div>
+    </nav>
+</header>
+
+<main class="catalog-container">
+    <div class="catalog-header">
+        <h1>Наши участки</h1>
+        <p>Выберите место для вашего будущего дома в Петропавловске</p>
+    </div>
+
+    <div class="grid">
+        <div class="card">
+            <div class="badge">NEW</div>
+            <div class="card-img-wrapper">
+                <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=500" alt="участок">
+            </div>
+            <div class="card-content">
+                <h3>Мкр. Береке</h3>
+                <p>10 соток, ровный участок, газ и свет подведены. Идеально для сада.</p>
+                <span class="price-tag">2 500 000 ₸</span>
+                <a href="contacts.html" class="btn-buy">Забронировать</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-img-wrapper">
+                <img src="https://images.unsplash.com/photo-1591389703635-e15a07b842d7?w=500" alt="участок">
+            </div>
+            <div class="card-content">
+                <h3>Рабочий поселок</h3>
+                <p>8 соток, тихий район, рядом школа и магазины. Плодородная почва.</p>
+                <span class="price-tag">1 800 000 ₸</span>
+                <a href="contacts.html" class="btn-buy">Забронировать</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-img-wrapper">
+                <img src="https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?w=500" alt="участок">
+            </div>
+            <div class="card-content">
+                <h3>
